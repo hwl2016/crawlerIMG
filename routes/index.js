@@ -8,7 +8,8 @@ var router = express.Router();
 var logger = require('../logger').logger;
 const child_process = require("child_process");
 
-const imgDir = path.join(__dirname, '../download/');
+// const imgDir = path.join(__dirname, '../download/');
+const imgDir = '/export/xunbaomallPhoto/IBS/SHW/2200699899/';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -56,7 +57,8 @@ router.post('/img', function(req, res, next) {
 			logger.info(`图片格式：${ext}`);
 			ext = '.jpg';	//强制修改图片格式为jpg
 			var imgName = md5(url) + ext;
-			var imgLocalUrl = createDateDir() + imgName;
+			// var imgLocalUrl = createDateDir() + imgName;
+			var imgLocalUrl = imgDir + imgName;
 			// 下载图片
 			request(imgUrl).pipe(fs.createWriteStream(imgLocalUrl));
 			logger.info(`图片页面路径：${url}`);
@@ -125,7 +127,8 @@ router.post('/imgs', function(req, res, next) {
 					logger.info(`图片格式：${ext}`);
 					ext = '.jpg';	//强制修改图片格式为jpg
 					var imgName = md5(url) + ext;
-					var imgLocalUrl = createDateDir() + imgName;
+					// var imgLocalUrl = createDateDir() + imgName;
+					var imgLocalUrl = imgDir + imgName;
 					// 下载图片
 					request(imgUrl).pipe(fs.createWriteStream(imgLocalUrl));
 					logger.info(`图片页面路径：${url}`);
@@ -182,7 +185,8 @@ function getImg(url) {
 			imgUrl = imgUrl[1];
 			var ext = imgUrl.slice(imgUrl.lastIndexOf('.'));
 			var imgName = md5(url) + ext;
-			var imgNewName = createDateDir() + imgName;
+			// var imgNewName = createDateDir() + imgName;
+			var imgNewName = imgDir + imgName;
 			// 下载图片
 			request(imgUrl).pipe(fs.createWriteStream(imgNewName));
 			logger.info(`抓取图片成功，图片保存路径：${imgNewName}`);
